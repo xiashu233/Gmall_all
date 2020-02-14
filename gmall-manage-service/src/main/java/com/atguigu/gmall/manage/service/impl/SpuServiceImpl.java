@@ -83,8 +83,31 @@ public class SpuServiceImpl implements SpuService {
             pmsProductSaleAttrValue.setSaleAttrId(productSaleAttr.getSaleAttrId());
             List<PmsProductSaleAttrValue> pmsProductSaleAttrValueList = pmsProductSaleAttrValueMapper.select(pmsProductSaleAttrValue);
             productSaleAttr.setSpuSaleAttrValueList(pmsProductSaleAttrValueList);
+
         }
         return pmsProductSaleAttrs;
+    }
+
+    @Override
+    public List<PmsProductSaleAttr> spuSaleAttrListCheckBySku(String productId,String skuId) {
+//        PmsProductSaleAttr pmsProductSaleAttr = new PmsProductSaleAttr();
+//        pmsProductSaleAttr.setProductId(productId);
+        List<PmsProductSaleAttr> pmsProductSaleAttrs = pmsProductSaleAttrMapper.selectSpuSaleAttrListCheckBySku(productId,skuId);
+//        for (PmsProductSaleAttr productSaleAttr : pmsProductSaleAttrs) {
+//            String saleAttrId = productSaleAttr.getSaleAttrId();
+//            PmsProductSaleAttrValue pmsProductSaleAttrValue = new PmsProductSaleAttrValue();
+//            pmsProductSaleAttrValue.setSaleAttrId(saleAttrId);
+//            pmsProductSaleAttrValue.setProductId(productId);
+//            List<PmsProductSaleAttrValue> pmsProductSaleAttrValues = pmsProductSaleAttrValueMapper.selectspuSaleAttrListCheckBySku(pmsProductSaleAttrValue);
+//            productSaleAttr.setSpuSaleAttrValueList(pmsProductSaleAttrValues);
+//        }
+        return pmsProductSaleAttrs;
+    }
+
+    @Override
+    public List<PmsSkuInfo> getSkuSaleAttrValeBySpu(String productId) {
+        List<PmsSkuInfo> pmsSkuInfos = pmsProductInfoMapper.selectSkuSaleAttrValeBySpu(productId);
+        return pmsSkuInfos;
     }
 
 
