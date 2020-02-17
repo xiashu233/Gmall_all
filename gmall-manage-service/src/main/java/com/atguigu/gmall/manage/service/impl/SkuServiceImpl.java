@@ -143,18 +143,24 @@ public class SkuServiceImpl implements SkuService {
                     e.printStackTrace();
                 }
                 return getSkuInfoBySkuId(skuId,ip);
-
             }
 
-
         }
-
-
-
-
-
         // 释放资源
         jedis.close();
         return pmsSkuInfo;
+    }
+
+    @Override
+    public List<PmsSkuInfo> getAllSku() {
+        List<PmsSkuInfo> pmsSkuInfos = pmsSkuInfoMapper.selectAll();
+        for (PmsSkuInfo pmsSkuInfo : pmsSkuInfos) {
+            String skuId = pmsSkuInfo.getId();
+            PmsSkuAttrValue pmsSkuAttrValue = new PmsSkuAttrValue();
+            pmsSkuAttrValue.setSkuId(skuId);
+            List<PmsSkuAttrValue> pmsSkuAttrValues = pmsSkuAttrValueMapper.select(pmsSkuAttrValue);
+            pmsSkuInfo.setSkuAttrValueList(pmsSkuAttrValues);
+        }
+        return pmsSkuInfos;
     }
 }
