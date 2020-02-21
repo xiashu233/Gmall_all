@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class AttrServiceImpl implements AttrService {
@@ -48,7 +49,7 @@ public class AttrServiceImpl implements AttrService {
                 // id为空 保存
                 pmsBaseAttrInfoMapper.insertSelective(pmsBaseAttrInfo);
                 for (PmsBaseAttrValue pmsBaseAttrValue:pmsBaseAttrValues){
-                    pmsBaseAttrValue.setAttrId(attrId);
+                    pmsBaseAttrValue.setAttrId(pmsBaseAttrInfo.getId());
                     pmsBaseAttrValueMapper.insertSelective(pmsBaseAttrValue);
                 }
             }else{
@@ -82,6 +83,13 @@ public class AttrServiceImpl implements AttrService {
         pmsBaseAttrValue.setAttrId(attrId);
         List<PmsBaseAttrValue> pmsBaseAttrValues = pmsBaseAttrValueMapper.select(pmsBaseAttrValue);
         return pmsBaseAttrValues;
+    }
+
+    @Override
+    public List<PmsBaseAttrInfo> getAttrValueListByValueId(Set<Object> valueIdSet) {
+        String join = StringUtils.join(valueIdSet,',');
+        List<PmsBaseAttrInfo> pmsBaseAttrInfos = pmsBaseAttrValueMapper.selectAttrValueListByValueId(join);
+        return pmsBaseAttrInfos;
     }
 
 

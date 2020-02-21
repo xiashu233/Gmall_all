@@ -33,7 +33,7 @@ public class ItemController {
         // 获取请求 ip
         String remoteAddr = request.getRemoteAddr();
         request.getHeader(""); // nginx 负载均衡时用此方法获得请求地址
-        System.out.println(remoteAddr);
+//        System.out.println(remoteAddr);
         // sku对应的信息
         PmsSkuInfo pmsSkuInfo = skuService.getSkuInfoBySkuId(skuId,remoteAddr);
         model.addAttribute("skuInfo",pmsSkuInfo);

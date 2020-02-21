@@ -28,6 +28,8 @@ public class SearchServiceImpl implements SearchService {
     @Autowired
     JestClient jestClient;
 
+
+
     @Override
     public List<PmsSearchSkuInfo> list(PmsSerachParam pmsSerachParam) throws IOException {
 
@@ -50,8 +52,11 @@ public class SearchServiceImpl implements SearchService {
             PmsSearchSkuInfo source = hit.source;
 
             Map<String, List<String>> highlight = hit.highlight;
-            String skuName = highlight.get("skuName").get(0);
-            source.setSkuName(skuName);
+            if (highlight != null){
+                String skuName = highlight.get("skuName").get(0);
+                source.setSkuName(skuName);
+            }
+
             pmsSearchSkuInfos.add(source);
         }
 
@@ -62,7 +67,8 @@ public class SearchServiceImpl implements SearchService {
     }
 
     private String getSearchDsl(PmsSerachParam pmsSerachParam) {
-        List<PmsSkuAttrValue> skuAttrValueList = pmsSerachParam.getSkuAttrValueList();
+
+        String[] valueId = pmsSerachParam.getValueId();
         String keyword = pmsSerachParam.getKeyword();
         String catalog3Id = pmsSerachParam.getCatalog3Id();
 
@@ -75,9 +81,9 @@ public class SearchServiceImpl implements SearchService {
             TermQueryBuilder termQueryBuilder = new TermQueryBuilder("catalog3Id",catalog3Id);
             boolQueryBuilder.filter(termQueryBuilder);
         }
-        if (skuAttrValueList != null){
-            for (PmsSkuAttrValue pmsSkuAttrValue : skuAttrValueList) {
-                TermQueryBuilder termQueryBuilder = new TermQueryBuilder("skuAttrValueList.valueId",pmsSkuAttrValue.getValueId());
+        if (valueId != null){
+            for (String value : valueId) {
+                TermQueryBuilder termQueryBuilder = new TermQueryBuilder("skuAttrValueList.valueId",value);
                 boolQueryBuilder.filter(termQueryBuilder);
             }
         }
@@ -97,7 +103,7 @@ public class SearchServiceImpl implements SearchService {
         searchSourceBuilder.size(20);
         // highlight
         HighlightBuilder highlightBuilder = new HighlightBuilder();
-        highlightBuilder.preTags("<span style='color:red'>");
+        highlightBuilder.preTags("<span style='color:red';'font-weight:bold' >");
         highlightBuilder.postTags("</span>");
         highlightBuilder.field("skuName");
         searchSourceBuilder.highlight(highlightBuilder);
