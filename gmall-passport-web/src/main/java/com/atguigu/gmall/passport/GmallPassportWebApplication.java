@@ -1,13 +1,13 @@
-package com.atguigu.gmall.cart;
+package com.atguigu.gmall.passport;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class GmallCartWebApplication {
+public class GmallPassportWebApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(GmallCartWebApplication.class, args);
+        SpringApplication.run(GmallPassportWebApplication.class, args);
     }
 
 }

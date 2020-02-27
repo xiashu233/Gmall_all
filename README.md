@@ -13,3 +13,6 @@
 
 #### 🥞 gmall-cart-service 搜索服务的 web 层端口号 8074
 #### 🍳 gmall-cart-web 搜索服务的 service 层端口号 8084
+
+#### gmall-passport-web 用户认证中心 8085
+#### 🍔 gmall-user-web 用户服务的 web 层端口号 8080
