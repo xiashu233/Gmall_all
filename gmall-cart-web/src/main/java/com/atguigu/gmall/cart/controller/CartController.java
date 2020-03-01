@@ -9,8 +9,11 @@ import com.atguigu.gmall.service.CartService;
 import com.atguigu.gmall.service.SkuService;
 import com.atguigu.gmall.util.CookieUtil;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.http.HttpResponse;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,7 +46,8 @@ public class CartController {
         OmsCartItem omsCartItem = skuInfoToOmsCart(skuInfo, quantity);
 
         // 判断用户是否登录
-        String memberId = "1";
+        String memberId = (String) request.getAttribute("memberId");
+        String nickname = (String) request.getAttribute("nickname");
 
         if (StringUtils.isBlank(memberId)){
             // 用户没登录
@@ -103,7 +107,8 @@ public class CartController {
         // 购物车集合
         List<OmsCartItem> omsCartItems = new ArrayList<>();
 
-        String memberId = "1";
+        String memberId = (String) request.getAttribute("memberId");
+        String nickname = (String) request.getAttribute("nickname");
 
         if (StringUtils.isBlank(memberId)){
             // 用户未登录 查询 cookie
@@ -131,9 +136,10 @@ public class CartController {
 
     @LoginRequired(loginSuccess = false)
     @PostMapping("checkCart")
-    public String checkCart(String isChecked,String skuId,Model model){
+    public String checkCart(String isChecked,String skuId,Model model,HttpServletRequest request){
 
-        String memberId = "1";
+        String memberId = (String) request.getAttribute("memberId");
+        String nickname = (String) request.getAttribute("nickname");
         OmsCartItem omsCartItem = new OmsCartItem();
         omsCartItem.setIsChecked(isChecked);
         omsCartItem.setMemberId(memberId);
@@ -154,10 +160,16 @@ public class CartController {
     @LoginRequired(loginSuccess = true)
     @ResponseBody
     @GetMapping("toTrade")
-    public String toTrade(){
+    public String toTrade(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap){
+        String memberId = (String) request.getAttribute("memberId");
+        String nickname = (String) request.getAttribute("nickname");
+
+
 
         return "从购物车到结算页面";
     }
+
+
 
     private BigDecimal getAllTotalPrice(List<OmsCartItem> omsCartItems) {
         BigDecimal allTotalPrice = new BigDecimal("0.0");
