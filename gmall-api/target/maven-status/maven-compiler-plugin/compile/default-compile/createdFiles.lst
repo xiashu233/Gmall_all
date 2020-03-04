@@ -1,9 +1,13 @@
 com\atguigu\gmall\bean\PmsSkuInfo.class
 com\atguigu\gmall\service\CatalogService.class
 com\atguigu\gmall\bean\PmsSkuAttrValue.class
+com\atguigu\gmall\service\SearchService.class
 com\atguigu\gmall\bean\PaymentInfo.class
+com\atguigu\gmall\service\CartService.class
 com\atguigu\gmall\bean\PmsBaseAttrInfo.class
 com\atguigu\gmall\bean\PmsBaseSaleAttr.class
+com\atguigu\gmall\bean\PmsSearchSkuInfo.class
+com\atguigu\gmall\bean\PmsSearchCrumb.class
 com\atguigu\gmall\bean\PmsBaseAttrValue.class
 com\atguigu\gmall\bean\PmsBrand.class
 com\atguigu\gmall\bean\OmsCompanyAddress.class
@@ -20,6 +24,7 @@ com\atguigu\gmall\bean\PmsBaseCatalog2.class
 com\atguigu\gmall\bean\PmsProductInfo.class
 com\atguigu\gmall\bean\OmsOrderItem.class
 com\atguigu\gmall\bean\PmsBaseCatalog1.class
+com\atguigu\gmall\bean\PmsSerachParam.class
 com\atguigu\gmall\service\SkuService.class
 com\atguigu\gmall\service\UserService.class
 com\atguigu\gmall\service\AttrService.class

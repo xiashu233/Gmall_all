@@ -2,6 +2,7 @@ package com.atguigu.gmall.service;
 
 import com.atguigu.gmall.bean.OmsCartItem;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public interface CartService {
@@ -18,4 +19,6 @@ public interface CartService {
     List<OmsCartItem> cartList(String memberId);
 
     void checkCart(OmsCartItem omsCartItem);
+
+    BigDecimal getAllTotalPrice(List<OmsCartItem> omsCartItems);
 }

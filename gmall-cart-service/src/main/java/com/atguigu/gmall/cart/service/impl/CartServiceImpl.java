@@ -137,6 +137,17 @@ public class CartServiceImpl implements CartService {
         flushCartCache(omsCartItem.getMemberId());
     }
 
+    @Override
+    public BigDecimal getAllTotalPrice(List<OmsCartItem> omsCartItems) {
+        BigDecimal allTotalPrice = new BigDecimal("0.0");
+        for (OmsCartItem omsCartItemd : omsCartItems) {
+            if (omsCartItemd.getIsChecked().equals("1")){
+                allTotalPrice = allTotalPrice.add(omsCartItemd.getTotalPrice());
+            }
+        }
+        return allTotalPrice;
+    }
+
     // 获取单个商品总价
     private void setTotalPrice(List<OmsCartItem> omsCartItems) {
         for (OmsCartItem omsCartItem : omsCartItems) {

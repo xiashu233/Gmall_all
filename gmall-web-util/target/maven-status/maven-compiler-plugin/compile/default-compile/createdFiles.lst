@@ -1,0 +1,5 @@
+com\atguigu\gmall\annotations\LoginRequired.class
+com\atguigu\gmall\util\JwtUtil.class
+com\atguigu\gmall\config\WebMvcConfiguration.class
+com\atguigu\gmall\util\CookieUtil.class
+com\atguigu\gmall\interceptors\AuthInterceptor.class

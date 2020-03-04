@@ -49,13 +49,22 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
         String success = "fail";
         Map<String,String> successMap = new HashMap<>();
         if (StringUtils.isNotBlank(token)){
+            String ip = request.getHeader("x-forwarded-for"); // 根据Nginx转发的客户端ip
+            if (StringUtils.isBlank(ip)){
+                ip = request.getRemoteAddr();
+            }
+            if (StringUtils.isBlank(ip)){
+                ip = "127.0.0.1";
+                // 不携带ip的请求 是非法请求
+            }
 
-            String successJson = HttpclientUtil.doGet("http://passport.gmall.com:8085/verify?token=" + token + "&currentIp=127.0.0.1" );
+            String successJson = HttpclientUtil.doGet("http://passport.gmall.com:8085/verify?token=" + token + "&currentIp=" + ip );
 
             successMap  = JSON.parseObject(successJson, Map.class);
             // 返回状态
             success = successMap.get("status");
-
+            request.setAttribute("memberId", successMap.get("memberId"));
+            request.setAttribute("nickname", successMap.get("nickname"));
         }
 
 
@@ -71,6 +80,8 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
                     return false;
                 }
                 // 验证通过，覆盖 cookie 中的 token
+
+
                 request.setAttribute("memberId", successMap.get("memberId"));
                 request.setAttribute("nickname", successMap.get("nickname"));
                 return true;
@@ -80,8 +91,6 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
                 // 验证 token 成功
                 if (success.equals("success")) {
                     // 不登录时验证成功 需要将token携带的用户信息 写入到cookie中
-                    request.setAttribute("memberId", "1");
-                    request.setAttribute("nickname", "nickname");
 
                     // 验证通过 覆盖 cookie 中的token
                     if (StringUtils.isNotBlank(token)){

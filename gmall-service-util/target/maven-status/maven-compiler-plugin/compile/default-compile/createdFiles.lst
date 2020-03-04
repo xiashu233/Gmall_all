@@ -1,0 +1,3 @@
+com\atguigu\gmall\conf\RedisConfig.class
+com\atguigu\gmall\util\GmallRedissonConfig.class
+com\atguigu\gmall\util\RedisUtil.class

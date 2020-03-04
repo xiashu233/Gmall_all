@@ -150,36 +150,17 @@ public class CartController {
         List<OmsCartItem> omsCartItems = cartService.cartList(memberId);
 
 
-        model.addAttribute("allTotalPrice",getAllTotalPrice(omsCartItems));
+        model.addAttribute("allTotalPrice",cartService.getAllTotalPrice(omsCartItems));
         model.addAttribute("cartList",omsCartItems);
 
         return "cartListInner";
     }
 
-    // 结算功能 toTrade
-    @LoginRequired(loginSuccess = true)
-    @ResponseBody
-    @GetMapping("toTrade")
-    public String toTrade(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap){
-        String memberId = (String) request.getAttribute("memberId");
-        String nickname = (String) request.getAttribute("nickname");
 
 
 
-        return "从购物车到结算页面";
-    }
 
 
-
-    private BigDecimal getAllTotalPrice(List<OmsCartItem> omsCartItems) {
-        BigDecimal allTotalPrice = new BigDecimal("0.0");
-        for (OmsCartItem omsCartItemd : omsCartItems) {
-            if (omsCartItemd.getIsChecked().equals("1")){
-                allTotalPrice = allTotalPrice.add(omsCartItemd.getTotalPrice());
-            }
-        }
-        return allTotalPrice;
-    }
 
 //    private boolean if_cart_exist(List<OmsCartItem> omsCartItems, OmsCartItem omsCartItem) {
 //        for (OmsCartItem cartItem : omsCartItems) {
