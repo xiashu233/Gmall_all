@@ -19,3 +19,5 @@
 
 #### 🍔 gmall-order-web 订单服务的 web 层端口号 8086
 #### 🍔 gmall-order-service 订单服务的 service 层端口号 8076 
+
+#### 🍔 gmall-payment 支付端口号 8087

@@ -148,6 +148,13 @@ public class CartServiceImpl implements CartService {
         return allTotalPrice;
     }
 
+    @Override
+    public void delCartByProcId(String productId) {
+        OmsCartItem omsCartItem = new OmsCartItem();
+        omsCartItem.setProductId(productId);
+        omsCartItemMapper.delete(omsCartItem);
+    }
+
     // 获取单个商品总价
     private void setTotalPrice(List<OmsCartItem> omsCartItems) {
         for (OmsCartItem omsCartItem : omsCartItems) {

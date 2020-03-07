@@ -1,13 +1,17 @@
 package com.atguigu.gmall.bean;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 public class OmsOrder implements Serializable {
 
-
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private String id;
     private String memberId;
@@ -53,6 +57,9 @@ public class OmsOrder implements Serializable {
     private Date receiveTime;
     private Date commentTime;
     private Date modifyTime;
+
+    @Transient
+    private List<OmsOrderItem> omsOrderItems;
 
     public String getId() {
         return id;
@@ -404,5 +411,13 @@ public class OmsOrder implements Serializable {
 
     public void setModifyTime(Date modifyTime) {
         this.modifyTime = modifyTime;
+    }
+
+    public List<OmsOrderItem> getOmsOrderItems() {
+        return omsOrderItems;
+    }
+
+    public void setOmsOrderItems(List<OmsOrderItem> omsOrderItems) {
+        this.omsOrderItems = omsOrderItems;
     }
 }

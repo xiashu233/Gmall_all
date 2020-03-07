@@ -21,4 +21,6 @@ public interface CartService {
     void checkCart(OmsCartItem omsCartItem);
 
     BigDecimal getAllTotalPrice(List<OmsCartItem> omsCartItems);
+
+    void delCartByProcId(String productId);
 }

@@ -14,7 +14,7 @@ public class OmsOrderItem implements Serializable {
     private String productBrand;
     private String productSn;
     private String productPrice;
-    private int productQuantity;
+    private BigDecimal productQuantity;
     private String productSkuId;
     private String productSkuCode;
     private String productCategoryId;
@@ -103,11 +103,11 @@ public class OmsOrderItem implements Serializable {
         this.productPrice = productPrice;
     }
 
-    public int getProductQuantity() {
+    public BigDecimal getProductQuantity() {
         return productQuantity;
     }
 
-    public void setProductQuantity(int productQuantity) {
+    public void setProductQuantity(BigDecimal productQuantity) {
         this.productQuantity = productQuantity;
     }
 
