@@ -17,7 +17,9 @@
 #### 🍔 gmall-user-web 用户服务的 web 层端口号 8080
 #### 🥐 gmall-passport-web 用户认证中心 web 层端口号 8085
 
-#### 🍔 gmall-order-web 订单服务的 web 层端口号 8086
-#### 🍔 gmall-order-service 订单服务的 service 层端口号 8076 
+#### 🥨 gmall-order-web 订单服务的 web 层端口号 8086
+#### 🥖 gmall-order-service 订单服务的 service 层端口号 8076 
 
-#### 🍔 gmall-payment 支付端口号 8087
+#### 🧀 gmall-payment 支付端口号 8087
+
+#### 🥗 gware-manage 仓库服务端口号 9001
